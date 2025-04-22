@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/consent_model.dart';
 
@@ -12,7 +13,9 @@ class StorageService {
       final jsonString = jsonEncode(consent.toJson());
       return await prefs.setString(_consentKey, jsonString);
     } catch (e) {
-      print('Error saving consent settings: $e');
+      if (kDebugMode) {
+        print('Error saving consent settings: $e');
+      }
       return false;
     }
   }
@@ -32,17 +35,6 @@ class StorageService {
     } catch (e) {
       print('Error loading consent settings: $e');
       return ConsentModel(); // Return default settings on error
-    }
-  }
-
-  // Clear consent settings (useful for testing)
-  Future<bool> clearConsent() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(_consentKey);
-    } catch (e) {
-      print('Error clearing consent settings: $e');
-      return false;
     }
   }
 }

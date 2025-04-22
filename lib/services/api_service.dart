@@ -5,8 +5,8 @@ enum ApiResult { success, failure }
 
 class ApiService {
   final Dio _dio;
-  // This is a stub API URL, replace with actual URL in a real app
-  final String _apiUrl = 'https://fake-api.example.com/consent';
+  // stub API URL
+  final String _apiUrl = 'https://fake-api.com/consent';
 
   ApiService() : _dio = Dio() {
     // Configure Dio if needed
@@ -26,7 +26,7 @@ class ApiService {
         ),
       );
 
-      // For demo purposes, we'll consider status codes in 200s as success
+      // we'll consider status codes in 200s as success
       if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return ApiResult.success;
       } else {
@@ -40,13 +40,13 @@ class ApiService {
 
   // For demo purposes, this method simulates API success
   Future<ApiResult> simulateSuccess() async {
-    await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
     return ApiResult.success;
   }
 
   // For demo purposes, this method simulates API failure
   Future<ApiResult> simulateFailure() async {
-    await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
     return ApiResult.failure;
   }
 }

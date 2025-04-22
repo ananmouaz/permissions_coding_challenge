@@ -6,7 +6,7 @@ import '../widgets/consent_toggle.dart';
 import '../widgets/sync_status_indicator.dart';
 
 class ConsentScreen extends StatelessWidget {
-  const ConsentScreen({Key? key}) : super(key: key);
+  const ConsentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +129,28 @@ class ConsentScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
+                  // Save button at the bottom
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<ConsentCubit>().syncConsent();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Save and Sync',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
